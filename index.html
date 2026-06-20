@@ -63,19 +63,24 @@ function salvar(chave, valor){
     respostas[chave] = valor;
 }
 
-/* ENVIO */
+/* 🔥 ENVIO CORRIGIDO (IMPORTANTE) */
 function enviarDados(){
+
     fetch(ENDPOINT, {
         method: "POST",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
         body: JSON.stringify(respostas)
     });
+
 }
 
 /* INICIO */
 function start(){
     app.innerHTML = `
         <h1>🦆 Teste Supremo dos Patos</h1>
-        <p>Os patos querem conhecer seu perfil criativo...</p>
+        <p>Os patos querem conhecer seu perfil...</p>
         <button class="btn" onclick="q1()">Começar</button>
     `;
 }
@@ -84,7 +89,6 @@ function start(){
 function q1(){
     app.innerHTML = `
         <h1>Cafeteria ☕ ou Bar 🍻?</h1>
-
         <button class="btn" onclick="salvar('rolê','Cafeteria'); q2()">Cafeteria</button>
         <button class="btn" onclick="salvar('rolê','Bar'); q2()">Bar</button>
     `;
@@ -94,7 +98,6 @@ function q1(){
 function q2(){
     app.innerHTML = `
         <h1>Canon 📷 ou Nikon 📸?</h1>
-
         <button class="btn" onclick="salvar('camera','Canon'); q3()">Canon</button>
         <button class="btn" onclick="salvar('camera','Nikon'); q3()">Nikon</button>
     `;
@@ -104,7 +107,6 @@ function q2(){
 function q3(){
     app.innerHTML = `
         <h1>Dia ☀️ ou Noite 🌙?</h1>
-
         <button class="btn" onclick="salvar('horario','Dia'); q4()">Dia</button>
         <button class="btn" onclick="salvar('horario','Noite'); q4()">Noite</button>
     `;
@@ -114,7 +116,6 @@ function q3(){
 function q4(){
     app.innerHTML = `
         <h1>Ambiente ideal</h1>
-
         <button class="btn" onclick="salvar('ambiente','Calmo'); q5()">Calmo 🌿</button>
         <button class="btn" onclick="salvar('ambiente','Agitado'); q5()">Agitado 🎉</button>
     `;
@@ -124,19 +125,17 @@ function q4(){
 function q5(){
     app.innerHTML = `
         <h1>No encontro você prefere:</h1>
-
         <button class="btn" onclick="salvar('estilo','Conversar'); q6()">🗣️ Conversar</button>
-        <button class="btn" onclick="salvar('estilo','Atividade'); q6()">🎯 Fazer atividade</button>
+        <button class="btn" onclick="salvar('estilo','Atividade'); q6()">🎯 Atividade</button>
     `;
 }
 
-/* 6 - meme controlado */
+/* 6 */
 function q6(){
     app.innerHTML = `
-        <h1>Opinião importante</h1>
-
-        <button class="btn" onclick="salvar('calvos','A favor'); q7()">😎 A favor de calvos</button>
-        <button class="btn" onclick="salvar('calvos','Contra'); q7()">🙃 Contra calvos</button>
+        <h1>Calvos 😎</h1>
+        <button class="btn" onclick="salvar('calvos','A favor'); q7()">A favor</button>
+        <button class="btn" onclick="salvar('calvos','Contra'); q7()">Contra</button>
     `;
 }
 
@@ -144,28 +143,25 @@ function q6(){
 function q7(){
     app.innerHTML = `
         <h1>Biscoito ou Bolacha?</h1>
-
-        <button class="btn" onclick="salvar('snack','Biscoito'); final()">🍪 Biscoito</button>
-        <button class="btn" onclick="salvar('snack','Bolacha'); final()">🥠 Bolacha</button>
+        <button class="btn" onclick="salvar('snack','Biscoito'); final()">Biscoito</button>
+        <button class="btn" onclick="salvar('snack','Bolacha'); final()">Bolacha</button>
     `;
 }
 
 /* FINAL */
 function final(){
 
-    enviarDados();
+    enviarDados(); // 🔥 agora funcionando corretamente
 
     app.innerHTML = `
         <h1>🦆 Analisando perfil...</h1>
-        <p>O Conselho Supremo dos Patos está avaliando suas respostas...</p>
+        <p>Os patos estão processando suas respostas...</p>
     `;
 
     setTimeout(() => {
 
         app.innerHTML = `
             <h1>🦆 Resultado Final</h1>
-
-            <p>Após análise completa do perfil criativo:</p>
 
             <p>
             ☕ ${respostas.rolê}<br>
@@ -181,11 +177,7 @@ function final(){
             ❤️ COMPATIBILIDADE DETECTADA: 100% ❤️
             </h2>
 
-            <p>
-            O Conselho dos Patos concluiu que a única solução lógica é:
-            </p>
-
-            <h2>🦆 Um date com Hugo 🦆</h2>
+            <p>Os patos concluíram: você foi selecionada para um date com Hugo 🦆</p>
         `;
 
     }, 2500);
