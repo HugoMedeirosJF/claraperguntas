@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🦆 Teste Supremo dos Patos</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(135deg,#fff7d6,#ffe8a3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+#app{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    width:90%;
+    max-width:600px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+h1{margin-bottom:15px;}
+
+.btn{
+    display:block;
+    width:100%;
+    margin:10px 0;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    font-size:18px;
+    cursor:pointer;
+    background:#ffd54f;
+}
+
+.btn:hover{
+    background:#ffca28;
+}
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+
+const app = document.getElementById("app");
+
+/* 🔗 SEU LINK DO GOOGLE SCRIPT */
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbylx3WJzDbbNf_v4kTLWR2EUY_eC0RqrrkWWFhCVQkT1Zt9_ymZjPklgP6uDvI-NFRFbg/exec";
+
+let respostas = {};
+
+function salvar(chave, valor){
+    respostas[chave] = valor;
+}
+
+/* ENVIO */
+function enviarDados(){
+    fetch(ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify(respostas)
+    });
+}
+
+/* INICIO */
+function start(){
+    app.innerHTML = `
+        <h1>🦆 Teste Supremo dos Patos</h1>
+        <p>Os patos querem conhecer seu perfil criativo...</p>
+        <button class="btn" onclick="q1()">Começar</button>
+    `;
+}
+
+/* 1 */
+function q1(){
+    app.innerHTML = `
+        <h1>Cafeteria ☕ ou Bar 🍻?</h1>
+
+        <button class="btn" onclick="salvar('rolê','Cafeteria'); q2()">Cafeteria</button>
+        <button class="btn" onclick="salvar('rolê','Bar'); q2()">Bar</button>
+    `;
+}
+
+/* 2 */
+function q2(){
+    app.innerHTML = `
+        <h1>Canon 📷 ou Nikon 📸?</h1>
+
+        <button class="btn" onclick="salvar('camera','Canon'); q3()">Canon</button>
+        <button class="btn" onclick="salvar('camera','Nikon'); q3()">Nikon</button>
+    `;
+}
+
+/* 3 */
+function q3(){
+    app.innerHTML = `
+        <h1>Dia ☀️ ou Noite 🌙?</h1>
+
+        <button class="btn" onclick="salvar('horario','Dia'); q4()">Dia</button>
+        <button class="btn" onclick="salvar('horario','Noite'); q4()">Noite</button>
+    `;
+}
+
+/* 4 */
+function q4(){
+    app.innerHTML = `
+        <h1>Ambiente ideal</h1>
+
+        <button class="btn" onclick="salvar('ambiente','Calmo'); q5()">Calmo 🌿</button>
+        <button class="btn" onclick="salvar('ambiente','Agitado'); q5()">Agitado 🎉</button>
+    `;
+}
+
+/* 5 */
+function q5(){
+    app.innerHTML = `
+        <h1>No encontro você prefere:</h1>
+
+        <button class="btn" onclick="salvar('estilo','Conversar'); q6()">🗣️ Conversar</button>
+        <button class="btn" onclick="salvar('estilo','Atividade'); q6()">🎯 Fazer atividade</button>
+    `;
+}
+
+/* 6 - meme controlado */
+function q6(){
+    app.innerHTML = `
+        <h1>Opinião importante</h1>
+
+        <button class="btn" onclick="salvar('calvos','A favor'); q7()">😎 A favor de calvos</button>
+        <button class="btn" onclick="salvar('calvos','Contra'); q7()">🙃 Contra calvos</button>
+    `;
+}
+
+/* 7 */
+function q7(){
+    app.innerHTML = `
+        <h1>Biscoito ou Bolacha?</h1>
+
+        <button class="btn" onclick="salvar('snack','Biscoito'); final()">🍪 Biscoito</button>
+        <button class="btn" onclick="salvar('snack','Bolacha'); final()">🥠 Bolacha</button>
+    `;
+}
+
+/* FINAL */
+function final(){
+
+    enviarDados();
+
+    app.innerHTML = `
+        <h1>🦆 Analisando perfil...</h1>
+        <p>O Conselho Supremo dos Patos está avaliando suas respostas...</p>
+    `;
+
+    setTimeout(() => {
+
+        app.innerHTML = `
+            <h1>🦆 Resultado Final</h1>
+
+            <p>Após análise completa do perfil criativo:</p>
+
+            <p>
+            ☕ ${respostas.rolê}<br>
+            📷 ${respostas.camera}<br>
+            🌙 ${respostas.horario}<br>
+            🌿 ${respostas.ambiente}<br>
+            🎯 ${respostas.estilo}<br>
+            😎 ${respostas.calvos}<br>
+            🍪 ${respostas.snack}
+            </p>
+
+            <h2 style="color:#d62828;">
+            ❤️ COMPATIBILIDADE DETECTADA: 100% ❤️
+            </h2>
+
+            <p>
+            O Conselho dos Patos concluiu que a única solução lógica é:
+            </p>
+
+            <h2>🦆 Um date com Hugo 🦆</h2>
+        `;
+
+    }, 2500);
+}
+
+start();
+
+</script>
+
+</body>
+</html>
